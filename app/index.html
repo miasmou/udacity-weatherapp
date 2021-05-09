@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <header id="header">
+        <div id="headerWrapper">
+            <h1>Weather Journal</h1>
+            <input id="zip" type="text" placeholder="Enter zip code here" />
+            <textarea id="feelings" type="text" placeholder="How are you feeling right now?"></textarea>
+            <button id="generate">Add new entry</button>
+        </div>
+    </header>
+    <section id="previousEntries">
+        <div id="entriesWrapper">
+            <h2>Previous entries</h2>
+            <div id="entriesContainer">
+            </div>
+        </div>
+    </section>
+    <script src='app.js'></script>
+</body>
+</html>
