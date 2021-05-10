@@ -81,8 +81,8 @@ const displayEntries = (entries) => {
         // Empty state if no entries
         createElementWithText(entriesContainer, 'p', "No entries to display", 'entries__placeholder');
     } else{
-        // Iterate through entries and build entry element for each
-        for(entry of entries){
+        // Iterate through entries in object and build entry element for each
+        Object.keys(entries).forEach(key=>{
             // Build out entry structure
             const newEntryContainer = document.createElement('div');
             newEntryContainer.classList.add('entryHolder');
@@ -94,17 +94,17 @@ const displayEntries = (entries) => {
             newEntryContent.classList.add('content');
     
             // Add elements with text data
-            createElementWithText(newEntryContainer, 'h3', entry.city, 'entry__header');
-            createElementWithText(newEntryDate, 'p', entry.date, 'entry__date');
-            createElementWithText(newEntryTemp, 'p', "Weather: " + entry.weather[0].main, 'entry__weather');
-            createElementWithText(newEntryTemp, 'p', "Temperature: " + entry.temp +'°C', 'entry__temp');
-            createElementWithText(newEntryContent, 'p', "You were feeling: " + entry.feeling, 'entry__feeling');
+            createElementWithText(newEntryContainer, 'h3', entries[key].city, 'entry__header');
+            createElementWithText(newEntryDate, 'p', entries[key].date, 'entry__date');
+            createElementWithText(newEntryTemp, 'p', "Weather: " + entries[key].weather[0].main, 'entry__weather');
+            createElementWithText(newEntryTemp, 'p', "Temperature: " + entries[key].temp +'°C', 'entry__temp');
+            createElementWithText(newEntryContent, 'p', "You were feeling: " + entries[key].feeling, 'entry__feeling');
     
             newEntryContainer.appendChild(newEntryDate);
             newEntryContainer.appendChild(newEntryTemp);
             newEntryContainer.appendChild(newEntryContent);
             fragment.appendChild(newEntryContainer);
-        }
+         });
         entriesContainer.appendChild(fragment);
     }
 }
