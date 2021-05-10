@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // App endpoint
-const projectData = [];
+let projectData={};
 
 /* Dependencies */
 const bodyParser = require('body-parser');
@@ -41,7 +41,9 @@ function addEntry(req, res){
         feeling: req.body.feeling
     }
 
-    projectData.push(newEntry);
+    let newKey = Object.keys(projectData).length;
+
+    projectData[newKey] = newEntry;
     res.send(projectData);
 }
 
