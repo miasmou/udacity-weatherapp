@@ -41,9 +41,7 @@ function addEntry(req, res){
         feeling: req.body.feeling
     }
 
-    let newKey = Object.keys(projectData).length;
-
-    projectData[newKey] = newEntry;
+    projectData = newEntry;
     res.send(projectData);
 }
 
