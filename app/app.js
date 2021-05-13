@@ -6,7 +6,11 @@ const units = "&units=metric";
 
 const zipInput = document.getElementById('zip');
 const feelingInput = document.getElementById('feelings');
-const entriesContainer = document.getElementById('entriesContainer');
+const entryHolder = document.getElementById('entryHolder');
+const entryDate = document.getElementById('date');
+const entryTemp = document.getElementById('temp');
+const entryContent = document.getElementById('content');
+const entryEmptyPlaceholder = document.getElementById('emptyPlaceholder');
 
 /* Function called by event listener */
 const submitEntry = () => { 
@@ -67,58 +71,26 @@ const getEntries = async (url) => {
     try{
         const entries = await result.json();
         console.log(entries);
-        displayEntries(entries);
+        displayEntry(entries);
     } catch(error){
         console.log('error', error);
     }
 }
 
 /* Update UI with entries */
-const displayEntries = (entries) => {
-    const fragment = document.createDocumentFragment();
-    entriesContainer.innerHTML = null;
-    if(entries.length == 0){
+const displayEntry = (entry) => {
+    if(entry.length == 0){
         // Empty state if no entries
-        createElementWithText(entriesContainer, 'p', "No entries to display", 'entries__placeholder');
+        entryHolder.style.display = "none";
+        entryEmptyPlaceholder.style.display = "block";
     } else{
-        // Iterate through entries in object and build entry element for each
-        Object.keys(entries).forEach(key=>{
-            // Build out entry structure
-            const newEntryContainer = document.createElement('div');
-            newEntryContainer.classList.add('entryHolder');
-            const newEntryDate = document.createElement('div');
-            newEntryDate.classList.add('date');
-            const newEntryTemp = document.createElement('div');
-            newEntryTemp.classList.add('temp');
-            const newEntryContent = document.createElement('div');
-            newEntryContent.classList.add('content');
-    
-            // Add elements with text data
-            createElementWithText(newEntryContainer, 'h3', entries[key].city, 'entry__header');
-            createElementWithText(newEntryDate, 'p', entries[key].date, 'entry__date');
-            createElementWithText(newEntryTemp, 'p', "Weather: " + entries[key].weather[0].main, 'entry__weather');
-            createElementWithText(newEntryTemp, 'p', "Temperature: " + entries[key].temp +'°C', 'entry__temp');
-            createElementWithText(newEntryContent, 'p', "You were feeling: " + entries[key].feeling, 'entry__feeling');
-    
-            newEntryContainer.appendChild(newEntryDate);
-            newEntryContainer.appendChild(newEntryTemp);
-            newEntryContainer.appendChild(newEntryContent);
-            fragment.appendChild(newEntryContainer);
-         });
-        entriesContainer.appendChild(fragment);
+        entryHolder.style.display = "block";
+        entryEmptyPlaceholder.style.display = "none";
+        // Add elements with text data
+        entryDate.innerHTML = `<h3>${entry.date}</h3>`;
+        entryTemp.innerHTML = `<p>${entry.temp}</p>`;
+        entryContent.innerHTML = `<p>${entry.feeling}</p>`;
     }
-}
-
-// Utility function to create elements with text inside and a custom class
-const createElementWithText = (container, type, innerText, classToAdd) => {
-    // Create element
-    const elementToCreate = document.createElement(type);
-    // Set inside text
-    elementToCreate.innerText = innerText;
-    // Add appropriate classes
-    elementToCreate.classList.add(classToAdd);
-    // Append to container
-    container.appendChild(elementToCreate);
 }
 
 // Get Entries on start

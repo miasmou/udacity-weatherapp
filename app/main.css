@@ -81,7 +81,7 @@ textarea{
     flex-direction: column;
 }
 
-.entryHolder{
+#entryHolder{
     border: rgb(181, 181, 182) 1px solid;
     border-radius: 8px;
     padding: 16px;
